@@ -1,0 +1,35 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Email Address</th>
+      <th scope="col">Name</th>
+      <th scope="col">Faculty</th>
+      <th scope="col">Is Verified?</th>
+      <th scope="col">Is Active?</th>
+      <th scope="col">Is Admin?</th>
+      <th scope="col">Is Tutor?</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for f in users %}
+    <tr>
+      <td>
+        <a href="{{url_for('users_config',request_id=f.id)}}">
+             <i class="far fa-edit fa-fw"></i>
+        </a>              {{f.AccountDetails.university_email }}
+      </td>
+        <td>{{f.PersonalDetails.first_name}} {{f.PersonalDetails.last_name}}</td>
+        <td>{{f.faculty.faculty_name}}</td>
+      <td>{{f.AccountDetails.verified_status}}</td>
+      <td>{{f.AccountDetails.is_active}}</td>
+      <td>{{f.AccountDetails.is_admin}}</td>
+      <td>{{f.AccountDetails.is_tutor}}</td>
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}
+

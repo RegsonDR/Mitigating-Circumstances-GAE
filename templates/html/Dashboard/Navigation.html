@@ -1,0 +1,19 @@
+<ul id="menu-content" class="menu-content collapse out" >
+    {% for page in navigation_bar %}
+          <a href="{{(url_for(page.view))}}" style="color:#e1ffff; color: inherit;text-decoration: inherit;">
+
+     <li class="{% if request.path == (url_for(page.view)) %}active{% endif %}">
+      <i class="fa fa-{{page.icon}} fa-lg" style="padding-left:10px;"></i> {{page.label}}
+    </li>
+                    </a>
+
+    {% endfor %}
+          <a href="{{(url_for('logout'))}}" style="color:#e1ffff; color: inherit;text-decoration: inherit;">
+
+    <li>
+          <i class="fa fa-sign-out-alt fa-lg" style="padding-left: 10px;"></i> Sign out
+    </li>
+                    </a>
+
+</ul>
+

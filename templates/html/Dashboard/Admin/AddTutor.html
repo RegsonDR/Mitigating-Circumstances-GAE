@@ -1,0 +1,105 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+<form class="form-signin"  method="POST" >
+{{ form.hidden_tag() }}
+<div class="card-header">
+   Personal Details
+</div>
+<div class="input-group mb-1">
+   {{form.first_name(class="form-control", placeholder="First Name")}}
+   {{form.last_name(class="form-control", placeholder="Last Name")}}
+</div>
+   <div class="card-header">
+   Contact Details
+</div>
+<div class="input-group mb-2">
+   {{form.mobile_number(class="form-control", placeholder="Mobile Number")}}
+</div>
+<div class="card-header">
+   Account Details
+</div>
+<div class="input-group mb-1">
+   {{form.email(type="email", class="form-control", placeholder="Email")}}
+        {{form.faculty_key.label}}
+    {{form.faculty_key(class="form-control", placeholder="Faculty Name")}}
+   {{form.unit_key.label}}
+   {{form.unit_key}}
+</div>
+<div class="input-group mb-2">
+   {{form.password(type="password", class="form-control", placeholder="Password")}}
+   <meter max="4" id="password-strength-meter" style="margin: 0px"></meter>
+   <div id="password-strength-text" style="width: 100%; margin: 5px; font-size:13px;"></div>
+
+   {{form.confirm_password(type="password", class="form-control", placeholder="Confirm Password", style="margin-bottom:3px")}}
+</div>
+{% endblock content %}
+{% block after_flash %}
+{% if form.errors %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 14px;">
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   <span aria-hidden="true">&times;</span>
+   </button>
+   {{error}}
+</div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+   <div style="width: 100%;   position: relative;    text-align: center;">
+
+   {{ form.submit(class="btn btn-lg btn-primary")}}
+    </div>
+
+</form>
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+     $(document).ready(function(){
+
+      updateUnits();
+
+      function updateUnits(){
+          $('#unit_key').attr('disabled','disabled');
+          $('#unit_key').empty();
+          $.post("{{url_for('get_units')}}",
+              {
+                  faculty:$('#faculty_key').val(),
+              },
+              function(data){
+              data.forEach(function(item){
+                  $('#unit_key').append($('<option>',{value:item[0],text:item[1]}));
+                   });
+              $('#unit_key').removeAttr('disabled');
+          });
+      }
+
+       $('#faculty_key').on('change', function() {
+            updateUnits()
+       });
+
+      var strength = {
+        0: "Bad",
+        1: "Weak",
+        2: "Good",
+        3: "Strong",
+        4: "Strong"
+       }
+
+       $('#password').keyup('click', function() {
+           result = zxcvbn($('#password').val());
+           $('#password-strength-meter').val(result.score);
+           $('#password-strength-text').html("<strong>Strength: " + strength[result.score] + " - Estimated Crack Time: "+result.crack_times_display.online_no_throttling_10_per_second+".</strong>" + "<p style=\"margin-bottom: 3px;\"> " + result.feedback.warning+" "+result.feedback.suggestions+"</p>");
+       });
+
+   });
+</script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+
+{% endblock %}

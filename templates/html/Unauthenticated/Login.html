@@ -1,0 +1,30 @@
+{% extends "html/Unauthenticated/Base_Template.html" %}
+{% block content %}
+<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+{{ form.hidden_tag() }}
+{{ form.email(type="email", id="inputEmail", class="form-control", placeholder="Email address", value=request.form.email)}}
+{{ form.password(type="password", id="inputPassword", class="form-control", placeholder="Password", value=request.form.password)}}
+{% endblock content %}
+{% block after_flash %}
+{{ form.submit(class="btn btn-lg btn-primary btn-block", style="font-size: 1rem;")}}
+<a href="{{url_for('google_login')}}" style="text-decoration: none;">
+<img img="googlelogin" src="{{ url_for('static', filename='Images/GoogleLogin.png') }}" height="40px" style="margin-top: 10px; margin-bottom: 10px; cursor:hand;">
+</a>
+<br>
+<a class="btn btn-primary mb-3" href="{{url_for('register_page')}}">Register</a>
+<a id="passwordReset" class="btn btn-primary mb-3" style="color: white;">Reset Password?</a>
+{% endblock after_flash %}
+{% block script %}
+<script>
+   $(document).ready(function(){
+       $('#passwordReset').on('click', function() {
+           $.post("{{url_for('reset_password_email')}}",
+               {
+                   reset_email:$('#inputEmail').val(),
+               },
+               alert("Instructions on resetting your password has been sent to your email!")
+           );
+       });
+   });
+</script>
+{% endblock script %}

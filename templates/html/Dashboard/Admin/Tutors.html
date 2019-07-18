@@ -1,0 +1,35 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+    <div class="d-flex justify-content-end">
+
+        <a href="{{url_for('add_tutor')}}">
+          Add New tutor?
+             <i class="fas fa-plus-square"></i>
+        </a>
+</div>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Email Address</th>
+      <th scope="col">Name</th>
+      <th scope="col">Faculty</th>
+      <th scope="col">Unit</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for f in users %}
+    <tr>
+      <td>
+        <a href="{{url_for('tutor_config',request_id=f.id)}}">
+             <i class="far fa-edit fa-fw"></i>
+        </a>              {{f.AccountDetails.university_email }}
+      </td>
+        <td>{{f.PersonalDetails.first_name}} {{f.PersonalDetails.last_name}}</td>
+        <td>{{f.faculty.faculty_name}}</td>
+      <td>{{f.unit}}</td>
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

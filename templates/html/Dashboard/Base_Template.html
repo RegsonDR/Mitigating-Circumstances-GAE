@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="gr__getbootstrap_com">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>{{Heading}}</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+       <link href="{{ url_for('static', filename='CSS/dashboard.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', filename='CSS/mycss.css') }}" rel="stylesheet">
+
+   </head>
+   <div class="nav-side-menu">
+       <a href="{{url_for('my_dashboard')}}" style="color:#e1ffff; color: inherit;text-decoration: inherit;">
+
+   <div class="brand"><i class="fas fa-compress-arrows-alt"></i> MitiCirc</div>
+                  </a>
+
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+        <div class="menu-list">
+           {% include 'html/Dashboard/Navigation.html' %}
+        </div>
+	</div>
+	<div class="container">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" style="font-size: 13px;">
+               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h4">{{Heading}}</h1>
+               </div>
+               {% with messages = get_flashed_messages(with_categories=true) %}
+               {% if messages %}
+               {% for category, message in messages %}
+               <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                  {{ message }}
+               </div>
+               {% endfor %}
+               {% endif %}
+               {% endwith %}
+
+               {% block content %}
+               {% endblock content %}
+                    {% block after_flash %}
+         {% endblock after_flash %}
+            </main>
+         </div>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      {% block script %}
+      {% endblock script %}
+   </body>
+</html>

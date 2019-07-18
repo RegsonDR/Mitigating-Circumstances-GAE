@@ -1,0 +1,59 @@
+{% extends "html/Unauthenticated/Base_Template.html" %}
+<!-- Custom styles for this template -->
+<link href="{{ url_for('static', filename='CSS/signinup.css') }}" rel="stylesheet">
+{% block content %}
+<h1 class="h3 mb-3 font-weight-normal">A few more details..</h1>
+{{ form.hidden_tag() }}
+<div class="card-header">
+   Personal Details
+</div>
+<div class="input-group mb-2">
+   {{form.student_number(class="form-control", placeholder="iNumber")}}
+</div>
+{{form.graduation_date.label}}
+<div class="input-group mb-2">
+   {{form.graduation_date(class="form-control", placeholder="Graduation Date", type="date")}}
+</div>
+<div class="card-header">
+   Contact Details
+</div>
+<div class="input-group mb-2">
+   {{form.mobile_number(class="form-control", placeholder="Mobile Number")}}
+</div>
+<div class="card-header">
+   Account Details
+</div>
+<div class="input-group mb-1">
+   {{form.university_email(type="email", class="form-control", placeholder="University Email", readonly=true)}}
+   {{form.faculty(class="form-control")}}
+</div>
+{% endblock content %}
+{% block after_flash %}
+{% if form.errors %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 14px;">
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   <span aria-hidden="true">&times;</span>
+   </button>
+   {{error}}
+</div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{{ form.submit(class="btn btn-lg btn-primary btn-block")}}
+<br>
+{% endblock after_flash %}
+{% block script %}
+<script>
+   $(document).ready(function(){
+
+       $('#student_number').keyup('click', function() {
+           $('#university_email').val(this.value+"@bournemouth.ac.uk");
+       });
+
+});
+</script>
+{% endblock script %}

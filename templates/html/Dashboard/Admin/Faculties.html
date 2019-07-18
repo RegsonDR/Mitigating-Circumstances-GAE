@@ -1,0 +1,36 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+    <div class="d-flex justify-content-end">
+
+        <a href="{{url_for('faculty_config')}}">
+          Add New Faculty?
+             <i class="fas fa-plus-square"></i>
+        </a>
+</div>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Is Active?</th>
+      <th scope="col">Units Assigned</th>
+      <th scope="col">Tutors Assigned</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for f in faculty %}
+    <tr>
+      <td>
+        <a href="{{url_for('faculty_config',request_id=f.id)}}">
+             <i class="far fa-edit fa-fw"></i>
+        </a>              {{f.faculty_name}}
+      </td>
+        <td>{{f.is_Active}}</td>
+      <td>{{f.unit_amount}}</td>
+      <td>{{f.tutor_amount}}</td>
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

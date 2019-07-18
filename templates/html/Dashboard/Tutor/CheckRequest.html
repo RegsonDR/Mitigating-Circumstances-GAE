@@ -1,0 +1,97 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+<form action="" class="form-signin" method="POST" >
+{% if ((form.status.data == "Approved") or (form.status.data == "Rejected")) %}
+    {% set var_disabled = True %}
+{% else %}
+    {% set var_disabled = False %}
+{% endif %}
+
+{{form.student_id.label}}
+{{form.student_id(class="form-control", disabled=True)}}
+{{form.unit.label}}
+{{form.unit(class="form-control", disabled=True)}}
+{{form.assignment_exam_name.label}}
+{{form.assignment_exam_name(class="form-control", disabled=True)}}
+    {%if form.evidence_document.data%}
+
+{{form.evidence_document.label}}
+<a href="{{url_for('serve')}}?id={{form.evidence_document.data}}" data-toggle="tooltip" title="View Image Document" download>
+    <i class="fas fa-file-alt fa-lg fa-fw"></i>
+</a>
+    {%endif%}
+
+        {%if form.evidence_image.data%}
+
+{{form.evidence_image.label}}
+<a href="{{url_for('serve')}}?id={{form.evidence_image.data}}" data-toggle="tooltip" title="View Image Document" download>
+  <i class="fas fa-file-alt fa-lg fa-fw"></i>
+</a>
+        {%endif%}
+
+<br>
+{{form.description.label}}
+{{form.description(class="form-control", disabled=True)}}
+
+    {{form.status.label}}
+    {{form.status(class="form-control", disabled=var_disabled)}}
+    <div id="approved-field" style="display: none;">
+    {{form.extended_to.label}}
+    {{form.extended_to(class="form-control", type="date", style="width: 100%;  display: inline-block;", disabled=var_disabled)}}
+    </div>
+
+    {{form.tutor_comments.label}}
+    {{form.tutor_comments(class="form-control", disabled=var_disabled)}}
+       {% if var_disabled==False %}
+
+        {% if form.errors %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 14px;">
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   <span aria-hidden="true">&times;</span>
+   </button>
+   {{error}}
+</div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+           {% endif %}
+
+    <div style="width: 100%;   position: relative;    text-align: center;">
+         {% if var_disabled==False %}
+    {{form.submit(class="btn btn-lg btn-primary")}}
+        {% endif %}
+     <a href="{{url_for('chat',request_id=request_id)}}" data-toggle="tooltip" title="Open Chat" style="position: absolute;    right: 0;">
+                    <i class="fas fa-comments fa-3x fa-fw"></i>
+                  </a>
+
+</div>
+
+</form>
+{% endblock content %}
+{% block script %}
+<script>
+   $(document).ready(function(){
+
+       checkApproved();
+
+       function checkApproved(){
+           if ($('#status').val() == "Approved"){
+              $('#approved-field').show()
+          } else {
+              $('#approved-field').hide();
+               $('#extended_to').val("");
+
+          }
+       }
+
+
+       $('#status').on('change', function() {
+          checkApproved();
+       });
+   });
+</script>
+{% endblock script %}

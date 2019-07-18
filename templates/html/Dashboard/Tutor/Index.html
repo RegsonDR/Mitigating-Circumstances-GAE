@@ -1,0 +1,76 @@
+{% macro produceRequest(RequestsObject, Type) -%}
+{% for request in RequestsObject if request.status == Type %}
+    <div class="card border-secondary mb-3" style="margin-bottom: 10px!important;">
+        <div class="card-header card-head d-flex justify-content-between">
+            <h6 class="d-flex align-items-start"> {{request.assignment_exam_name|capitalize}}</h6>
+            <h6 class="d-flex align-items-end">{{request.university_email}} || {{request.unit|capitalize}}</h6>
+        </div>
+
+      <div class="card-body text-secondary" style="padding: 5px 10px;">
+        <p class="card-text card-desc">{{ request.description|capitalize }}</p>
+          <div class="d-flex justify-content-between">
+              <span class="d-flex align-items-start">
+                   <a href="{{url_for('chat',request_id=request.id)}}" data-toggle="tooltip" title="Open Chat" style="position: absolute;        z-index: 1; ">
+                    <i class="fas fa-comments fa-sm fa-fw"></i>
+                  </a>
+
+                  {% if request.evidence_document %}
+                  <a href="{{url_for('serve')}}?id={{request.evidence_document}}" data-toggle="tooltip" title="View Uploaded Document"  style="position: absolute; left: 30px;   z-index: 1;" download>
+                  <i class="fas fa-file-alt fa-sm fa-fw"></i>
+                  </a>
+                  {% endif %}
+                  {% if request.evidence_image %}
+                  <a href="{{url_for('serve')}}?id={{request.evidence_image}}" data-toggle="tooltip" title="View Uploaded Image" style="position: absolute;     left: 60px;   z-index: 1; " download>
+                    <i class="fas fa-images fa-sm fa-fw"></i>
+                  </a>
+                  {% endif %}
+              </span>
+              <span class="card-date-time d-flex align-items-end"> {{request.create_date.strftime('%Y-%m-%d')}}
+                  {{request.create_date.strftime('%I:%M %p')}}
+                  </span>
+          </div>
+      </div>
+        <a href="{{url_for('check_request',request_id=request.id)}}" style="width: 100%;height: 100%;display: inline;top: 0;left: 0;position: absolute;">
+        </a>
+    </div>
+
+    {% else %}
+    <div class="alert alert-info alert-dismissible fade show">
+        There are no requests in this category.
+    </div>
+    {% endfor %}
+{%- endmacro %}
+
+
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills nav-fill" id="Requests" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="student-tab" data-toggle="tab" href="#student" role="tab" aria-controls="submitted" aria-selected="true">Waiting For Student Action</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="tutor-tab" data-toggle="tab" href="#tutor" role="tab" aria-controls="contact" aria-selected="false">Waiting For Tutor action</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="approved-tab" data-toggle="tab" href="#approved" role="tab" aria-controls="profile" aria-selected="false">Approved</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="rejected-tab" data-toggle="tab" href="#rejected" role="tab" aria-controls="contact" aria-selected="false">Rejected</a>
+      </li>
+    </ul>
+  </div>
+<div class="tab-content" id="RequestsContent" style="margin-top: 10px;">
+  <div class="tab-pane tab-cards fade show active" id="student" role="tabpanel" aria-labelledby="student-tab" >
+      {{ produceRequest(requests,"Waiting for Student") }}
+  </div>
+  <div class="tab-pane tab-cards fade" id="tutor" role="tabpanel" aria-labelledby="tutor-tab">
+      {{ produceRequest(requests,"Waiting for Tutor") }}
+  </div>
+  <div class="tab-pane tab-cards fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
+      {{ produceRequest(requests,"Approved") }}
+  </div>
+  <div class="tab-pane tab-cards fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+      {{ produceRequest(requests,"Rejected") }}
+  </div>
+</div>
+</div>

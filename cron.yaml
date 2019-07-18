@@ -1,0 +1,19 @@
+cron:
+- description: Clear failed logins after 15 minutes
+  url: /CRON/Clear/FailedLogins
+  schedule: every 15 minutes
+  retry_parameters:
+    min_backoff_seconds: 2.5
+    max_doublings: 5
+- description: Clear expired passwood resets
+  url: /CRON/Clear/ExpiredPasswordResets
+  schedule: every day 23:59
+  retry_parameters:
+    min_backoff_seconds: 2.5
+    max_doublings: 5
+- description: Disable accounts past the graduation date
+  url: /CRON/Disable/Accounts
+  schedule: every day 23:59
+  retry_parameters:
+    min_backoff_seconds: 2.5
+    max_doublings: 5

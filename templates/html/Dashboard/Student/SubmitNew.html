@@ -1,0 +1,149 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+{% if ((form.status.data == "Approved") or (form.status.data == "Rejected")) %}
+{% set var_disabled = True %}
+{% else %}
+{% set var_disabled = False %}
+{% endif %}
+
+{% if form.status.data != "None" %}
+  <div class="nav-link text-center {{form.status.data | replace(" ","")}}-style" style="color: #fff; border-radius: .25rem; font-size: 15px;">
+
+            <b>{{form.status.data}}</b>
+      {% if (form.tutor_comments.data != "None") and (form.tutor_comments.data) %}:{{form.tutor_comments.data}}{% endif %}
+    </div>
+{% endif %}
+
+<form action="{{ uploadUri }}" class="form-signin" enctype="multipart/form-data" method="POST" >
+   {{ form.hidden_tag() }}
+   {{form.unit.label}}
+   {{form.unit(class="form-control", disabled=var_disabled)}}
+   {{form.assignment_exam_name.label}}
+   {{form.assignment_exam_name(class="form-control", disabled=var_disabled)}}
+   {{form.description.label}}
+   {{form.description(rows="3", class="form-control", disabled=var_disabled)}}
+    {% if form.status.data=="Approved" %}
+    {{form.extended_to.label}}
+    {{form.extended_to(class="form-control", type="date", style="width: 100%;  display: inline-block;", disabled=var_disabled)}}
+      {% endif %}
+
+   <div class="d-flex justify-content-between">
+      <div class="align-items-start">
+          {% if var_disabled==False %}
+         {{form.evidence_document.label}}
+          {% endif %}
+      </div>
+      {%if form.evidence_document.data%}
+      <div id="docDiv" class="align-items-end">
+         Uploaded Document:
+         <a href="{{url_for('serve')}}?id={{form.evidence_document.data}}"  data-toggle="tooltip" title="View Uploaded Document" download>
+         <i class="fas fa-file-alt fa-lg fa-fw"></i>
+         </a>
+          {% if var_disabled==False %}
+          <a id="deleteDocument"  data-id="{{form.evidence_document.data}}" class="btn btn-primary" style="color: white;">Delete Document</a>
+            {% endif %}
+      </div>
+      {%endif%}
+   </div>
+
+   {% if var_disabled==False %}
+       {% if form.evidence_document.data %}
+            {{form.evidence_document(class="form-control", style="display:none")}}
+    {% else %}
+        {{form.evidence_document(class="form-control")}}
+       {% endif %}
+   {% endif %}
+
+   <div class="d-flex justify-content-between">
+      <div class="align-items-start">
+         {% if var_disabled==False %}
+         {{form.evidence_image.label}}
+         {% endif %}
+      </div>
+      {%if form.evidence_image.data%}
+      <div id="imgDiv" class="align-items-end">
+         Uploaded Image:
+         <a href="{{url_for('serve')}}?id={{form.evidence_image.data}}" data-toggle="tooltip" title="View Image Document" download>
+         <i class="fas fa-images fa-lg fa-fw"></i>
+         </a>
+          {% if var_disabled==False %}
+          <a id="deleteImage" data-id="{{form.evidence_image.data}}" class="btn btn-primary" style="color: white;">Delete Image</a>
+            {% endif %}
+      </div>
+      {%endif%}
+   </div>
+   {% if var_disabled==False %}
+     {% if form.evidence_image.data %}
+        {{form.evidence_image(class="form-control" , style="display:none;")}}
+        {% else %}
+            {{form.evidence_image(class="form-control")}}
+
+    {% endif %}
+        {% if form.errors %}
+            {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 14px;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{error}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+   {% endif %}
+
+    <div style="width: 100%;   position: relative;    text-align: center;">
+        {% if var_disabled==False %}
+    {{form.submit(class="btn btn-lg btn-primary")}}
+        {% endif %}
+{% if form.status.data != "None" %}
+
+     <a href="{{url_for('chat',request_id=request_id)}}" data-toggle="tooltip" title="Open Chat" style="position: absolute;    right: 0;">
+                    <i class="fas fa-comments fa-3x fa-fw"></i>
+                  </a>
+        {% endif %}
+
+</div>
+
+
+</form>
+{% endblock content %}
+
+{% block script %}
+<script>
+   $(document).ready(function(){
+
+       $('#deleteDocument').on('click', function() {
+           $.post("{{url_for('delete_attachment')}}",
+               {
+                   id: $('#deleteDocument').data("id"),
+                   type: "document",
+
+               },
+                function(){
+                    $('#docDiv').hide();
+                    $('#evidence_document').show();
+                }
+           );
+       });
+
+              $('#deleteImage').on('click', function() {
+           $.post("{{url_for('delete_attachment')}}",
+               {
+                   id:$('#deleteImage').data("id"),
+                   type: "image",
+
+               },
+                function(){
+                    $('#imgDiv').hide();
+                    $('#evidence_image').show();
+                }
+           );
+       });
+
+   });
+</script>
+{% endblock script %}

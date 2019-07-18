@@ -1,0 +1,40 @@
+{% block content %}
+<form method="POST" >
+   {{ form.hidden_tag() }}
+   {{form.receive_email.label}}
+   {{form.receive_email}}
+<div class="input-group mb-1">
+   {{form.mobile_number.label(style="display:block;")}}
+   {{form.mobile_number(class="form-control", placeholder="Mobile Number", style="width: 100%;  display: inline-block;")}}
+</div>
+   {{form.receive_text.label}}
+   {{form.receive_text}}
+   <div>* Notifications are sent when request status' are changed.</div>
+   {% if oauth_status %}
+      <div class="connect-google">
+			<a href="{{url_for('google_disable')}}" class="social-button google" id="googleDisconnect"> <span>Disconnect Google</span></a>
+      </div>
+      {% else %}
+      <div class="connect-google">
+			<a href="{{url_for('google_login')}}" class="social-button google" id="googleConnect"> <span>Connect with Google</span></a>
+      </div>
+      {% endif %}
+
+
+   {{ form.submit(class="btn btn-lg btn-primary btn-block")}}
+</form>
+{% endblock %}
+{% block script %}
+<script>
+   $(document).ready(function(){
+       $('#googleConnect').on('click', function() {
+           $.post("{{url_for('google_login')}}",
+               {
+                   reset_email:$('#inputEmail').val(),
+               },
+               alert("Instructions on resetting your password has been sent to your email!")
+           );
+       });
+   });
+</script>
+{% endblock script %}

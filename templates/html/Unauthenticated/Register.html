@@ -1,0 +1,89 @@
+{% extends "html/Unauthenticated/Base_Template.html" %}
+<!-- Custom styles for this template -->
+<link href="{{ url_for('static', filename='CSS/signinup.css') }}" rel="stylesheet">
+{% block content %}
+<h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+{{ form.hidden_tag() }}
+<div class="card-header">
+   Personal Details
+</div>
+<div class="input-group mb-1">
+   {{form.first_name(class="form-control", placeholder="First Name")}}
+   {{form.last_name(class="form-control", placeholder="Last Name")}}
+</div>
+<div class="input-group mb-2">
+   {{form.student_number(class="form-control", placeholder="iNumber")}}
+</div>
+{{form.graduation_date.label}}
+<div class="input-group mb-2">
+   {{form.graduation_date(class="form-control", placeholder="Graduation Date", type="date")}}
+</div>
+<div class="card-header">
+   Contact Details
+</div>
+<div class="input-group mb-2">
+   {{form.mobile_number(class="form-control", placeholder="Mobile Number")}}
+</div>
+<div class="card-header">
+   Account Details
+</div>
+<div class="input-group mb-1">
+   {{form.university_email(type="email", class="form-control", placeholder="University Email", readonly=true)}}
+   {{form.faculty(class="form-control")}}
+</div>
+<div class="input-group mb-2">
+   {{form.password(type="password", class="form-control", placeholder="Password")}}
+   <meter max="4" id="password-strength-meter" style="margin: 0px"></meter>
+   <div id="password-strength-text" style="width: 100%; margin: 5px; font-size:13px;"></div>
+
+   {{form.confirm_password(type="password", class="form-control", placeholder="Confirm Password", style="margin-bottom:3px")}}
+</div>
+{% endblock content %}
+{% block after_flash %}
+{% if form.errors %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 14px;">
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   <span aria-hidden="true">&times;</span>
+   </button>
+   {{error}}
+</div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="g-recaptcha" style="display: inline-block;  text-align: center;" data-sitekey="your key here"></div>
+
+
+{{ form.submit(class="btn btn-lg btn-primary btn-block")}}
+<br>
+<a class="mt-5 mb-3 text-muted" href="{{url_for('login_page')}}">Already have an account? Sign in</a>
+{% endblock after_flash %}
+{% block script %}
+<script>
+   $(document).ready(function(){
+
+       $('#student_number').keyup('click', function() {
+           $('#university_email').val(this.value+"@bournemouth.ac.uk");
+       });
+
+       var strength = {
+        0: "Bad",
+        1: "Weak",
+        2: "Good",
+        3: "Strong",
+        4: "Strong"
+       }
+
+       $('#password').keyup('click', function() {
+           result = zxcvbn($('#password').val());
+           $('#password-strength-meter').val(result.score);
+           $('#password-strength-text').html("<strong>Strength: " + strength[result.score] + " - Estimated Crack Time: "+result.crack_times_display.online_no_throttling_10_per_second+".</strong>" + "<p style=\"margin-bottom: 3px;\"> " + result.feedback.warning+" "+result.feedback.suggestions+"</p>");
+       });
+
+});
+</script>
+{% endblock script %}

@@ -1,0 +1,8 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+
+{% include "html/Dashboard/"+data['user_role']+"/Settings.html" %}
+
+{% endblock content %}
+{% block script %}
+{% endblock script %}

@@ -1,0 +1,62 @@
+{% extends "html/Dashboard/Base_Template.html" %}
+{% block content %}
+<form class="form-signin"  method="POST" >
+    {{form.faculty_key.label}}
+    {{form.faculty_key(class="form-control", placeholder="Faculty Name")}}
+    {{form.is_Tutor.label}}
+    {{form.is_Tutor}}
+    {{form.unit_key.label}}
+    {{form.unit_key}}
+    {% endblock content %}
+{% block after_flash %}
+{% if form.errors %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 14px;">
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   <span aria-hidden="true">&times;</span>
+   </button>
+   {{error}}
+</div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+   <div style="width: 100%;   position: relative;    text-align: center;">
+
+   {{ form.submit(class="btn btn-lg btn-primary")}}
+    </div>
+</form>
+{% endblock %}
+
+
+{% block script %}
+<script>
+  $(document).ready(function(){
+
+      updateUnits();
+
+      function updateUnits(){
+          $('#unit_key').attr('disabled','disabled');
+          $('#unit_key').empty();
+          $.post("{{url_for('get_units')}}",
+              {
+                  faculty:$('#faculty_key').val(),
+              },
+              function(data){
+              data.forEach(function(item){
+                  $('#unit_key').append($('<option>',{value:item[0],text:item[1]}));
+                   });
+              $('#unit_key').removeAttr('disabled');
+          });
+      }
+
+       $('#faculty_key').on('change', function() {
+            updateUnits()
+       });
+
+   });
+
+</script>
+{% endblock %}

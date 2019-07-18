@@ -1,0 +1,6 @@
+werkzeug
+pyDes
+jinja2
+markupsafe
+Flask
+Pillow

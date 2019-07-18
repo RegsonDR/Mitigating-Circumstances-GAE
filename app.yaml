@@ -1,0 +1,26 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /CRON/.*
+  script: main.app
+  login: admin
+- url: .*
+  script: main.app
+
+libraries:
+- name: jinja2
+  version: "2.6"
+- name: markupsafe
+  version: "0.23"
+- name: flask
+  version: "0.12"
+- name: ssl
+  version: latest
+- name: PIL
+  version: "1.1.7"
