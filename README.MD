@@ -75,4 +75,4 @@ Google App Engine SDK is required.
 ### SMS
 <img src="https://image.prntscr.com/image/20B6wutQQ1qLEht2QB_UWw.png" width="50%"></img>
 ### Email
-<img src="https://image.prntscr.com/image/Th2cu1LaR9qeN2t8Pzxu8Q.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/Th2cu1LaR9qeN2t8Pzxu8Q.png" width="75%"></img>
