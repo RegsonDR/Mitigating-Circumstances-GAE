@@ -4,7 +4,7 @@ This is a full mitigating circumstances system, where students can sign in after
 
 The application is written with Python using Flask on Google App Engine. 
 
-An example of the site is deployed at https://mc-system-223313.appspot.com
+An example of the site is deployed at https://mc-system-223313.appspot.com (you can contact me for the login details).
 
 ## Set up
 
