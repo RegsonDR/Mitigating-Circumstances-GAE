@@ -27,6 +27,8 @@ The application heavily uses APIs, so all tokens must be included.
 - Register.html:70  Change "Bournemouth.ac.uk" to any domain you require.
 - Chat.html:80  Pusher APP Key.
 
+Google App Engine SDK is required.
+
 
 ## API and Technologies used
 | Name | Authentication method | Location | Description |
