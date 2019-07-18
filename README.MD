@@ -8,7 +8,7 @@ An example of the site is deployed at https://mc-system-223313.appspot.com (you 
 
 ## Set up
 
-The application heavily uses APIs, so all tokens must be included.
+The application heavily uses APIs as it is built using cloud technologies primarily, so all tokens must be included.
 
 - main.py:22  Change SECRET_KEY to a random string of characters.
 - main.py:118 & 274 Change "Bournemouth.ac.uk" to any domain you require.
