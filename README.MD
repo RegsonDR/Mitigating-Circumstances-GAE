@@ -106,8 +106,8 @@ Google App Engine SDK is required.
 
 
 ### Trello
-<img src="https://image.prntscr.com/image/XJh7JfeBRIusv2mdnZORjg.png" width="50%"></img>
-<img src="https://image.prntscr.com/image/O-Q8cWDhRrav4PBf5Otw5A.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/XJh7JfeBRIusv2mdnZORjg.png" width="70%"></img>
+<img src="https://image.prntscr.com/image/O-Q8cWDhRrav4PBf5Otw5A.png" width="70%"></img>
 ### SMS
 <img src="https://image.prntscr.com/image/20B6wutQQ1qLEht2QB_UWw.png" width="50%"></img>
 ### Email
