@@ -73,36 +73,36 @@ Google App Engine SDK is required.
 
 ## Screenshots
 ### Register
-<img src="https://image.prntscr.com/image/YD8kiaJ1S_i73n6i8aTXeQ.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/YD8kiaJ1S_i73n6i8aTXeQ.png" width="70%"></img>
 
 ### Login
-<img src="https://image.prntscr.com/image/76SK8QJtQkuI7DOJBcN-Ng.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/76SK8QJtQkuI7DOJBcN-Ng.png" width="70%"></img>
 
 ### Student
 #### Home
-<img src="https://image.prntscr.com/image/zMrl0dPJRje2swj3XAO2iQ.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/zMrl0dPJRje2swj3XAO2iQ.png" width="70%"></img>
 #### Submit New Request
-<img src="https://image.prntscr.com/image/TMVZl7SzTLGHu00OdmGKvA.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/TMVZl7SzTLGHu00OdmGKvA.png" width="70%"></img>
 #### Account Settings
-<img src="https://image.prntscr.com/image/VlO2JNSSTjmXTV12UQheqg.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/VlO2JNSSTjmXTV12UQheqg.png" width="70%"></img>
 #### Approved Application
-<img src="https://image.prntscr.com/image/LBCofgGZT3W-G4ijPpjNCQ.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/LBCofgGZT3W-G4ijPpjNCQ.png" width="70%"></img>
 ### Tutor
 #### Reqeust Approval
-<img src="https://image.prntscr.com/image/1AcfJZ3XTROrhexrMXmXmw.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/1AcfJZ3XTROrhexrMXmXmw.png" width="70%"></img>
 ### Admin
 #### Faculties
-<img src="https://image.prntscr.com/image/KITk5G_QQxK98RCuel4DHw.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/KITk5G_QQxK98RCuel4DHw.png" width="70%"></img>
 #### Units
-<img src="https://image.prntscr.com/image/CEDJuh4bTBGNaCUzPMYEnQ.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/CEDJuh4bTBGNaCUzPMYEnQ.png" width="70%"></img>
 #### Tutors
-<img src="https://image.prntscr.com/image/4FNDIKL5Q_qwScH19KV4Sw.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/4FNDIKL5Q_qwScH19KV4Sw.png" width="70%"></img>
 #### Users
-<img src="https://image.prntscr.com/image/NSejQYZBQ6ScIyObkxnWEg.png" width="50%"></img>
-<img src="https://image.prntscr.com/image/SbiGQZS3SDuvtGpv9hNx4g.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/NSejQYZBQ6ScIyObkxnWEg.png" width="70%"></img>
+<img src="https://image.prntscr.com/image/SbiGQZS3SDuvtGpv9hNx4g.png" width="70%"></img>
 
 ### Chat
-<img src="https://image.prntscr.com/image/zCK-flalQ7Oqt9KJL43Xzg.png" width="50%"></img>
+<img src="https://image.prntscr.com/image/zCK-flalQ7Oqt9KJL43Xzg.png" width="70%"></img>
 
 
 ### Trello
