@@ -2,7 +2,7 @@
 
 This is a full mitigating circumstances system, where students can sign in after email verification and submit applications to the faculty tutors for approval. A full customizable roles (student, tutor & admin) and permissions system is available, to allow admins to modify the system to best fit their needs, including complete set up of their school faculties. Faculty plays a big part in the application, as depending on the student’s faculty which was set on registration, they will only see units in that faculty. For tutors, they will see all requests which have been created for their faculty. SMS Notifications, Google Sign-in, Live-Chat and a Trello Integration, is also built into the application.
 
-The application is written with Python using Flask on Google App Engine (standard enviroment). 
+The application is written with Python using Flask on Google App Engine (standard environment). 
 
 An example of the site is deployed at https://mc-system-223313.appspot.com (you can contact me for the login details).
 
